@@ -1,0 +1,64 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+    api ("com.google.guava:guava:$guava") {
+        exclude module: 'jsr305'
+    }
+    api "com.android.support:multidex:$multidex"
+
+    // rxjava & retrofit
+    api "io.reactivex.rxjava2:rxandroid:$rxandroid"
+    api "io.reactivex.rxjava2:rxjava:$rxjava2"
+    api("com.trello.rxlifecycle2:rxlifecycle:$rxlifecycle2") {
+        exclude module: 'jsr305'
+    }
+    api "com.squareup.retrofit2:retrofit:$retrofit2"
+    api("com.squareup.retrofit2:converter-gson:$retrofit2_converter_gson") {
+        exclude module: 'jsr305'
+    }
+    api("com.trello.rxlifecycle2:rxlifecycle-android:$rxlifecycle2_android") {
+        exclude module: 'jsr305'
+    }
+    api "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofit2_rxjava2_adapter"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp3_logging_interceptor"
+    api "com.squareup.retrofit2:converter-scalars:$retrofit2_converter_scalars"
+
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
+
+//    classpath "io.objectbox:objectbox-gradle-plugin:$objectbox_version"
+
+}
+repositories {
+    mavenCentral()
+}

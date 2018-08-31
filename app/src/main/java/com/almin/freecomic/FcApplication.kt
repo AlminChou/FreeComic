@@ -1,19 +1,24 @@
 package com.almin.freecomic
 
-import android.app.Application
+import com.almin.freecomic.manager.RetrofitManager
+import com.almin.library.AbstractApplication
 
 /**
  * Created by Almin on 2018/6/8.
  */
-class FcApplication : Application() {
+class FcApplication : AbstractApplication() {
 
     companion object {
-        lateinit var instance : FcApplication
+        private lateinit var instance : FcApplication
+        fun instance() = instance
     }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+
+        RetrofitManager.instance().init(FcConfiguration.instance())
     }
 
     override fun onTerminate() {

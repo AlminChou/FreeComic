@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">FreeComic</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">书架</string>
+    <string name="title_notifications">我的</string>
+    <string name="login">登录</string>
+    <string name="useraccount">账号</string>
+    <string name="password">密码</string>
+    <string name="forgot_pwd">忘记密码？</string>
+    <string name="sign_up">注册</string>
 </resources>
