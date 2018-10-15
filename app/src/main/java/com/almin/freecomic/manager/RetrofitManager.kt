@@ -1,8 +1,7 @@
 package com.almin.freecomic.manager
 
-import com.almin.freecomic.mvp.datasource.network.FcDynamicBaseUrlInterceptor
-import com.almin.freecomic.mvp.datasource.network.FcUrlProcessor
-import com.almin.freecomic.mvp.datasource.network.apiservice.UserApiService
+import com.almin.freecomic.module.common.datasource.network.FcDynamicBaseUrlInterceptor
+import com.almin.freecomic.module.common.datasource.network.FcUrlProcessor
 import com.almin.library.network.retrofitlibrary.RetrofitClientProvider
 import okhttp3.OkHttpClient
 

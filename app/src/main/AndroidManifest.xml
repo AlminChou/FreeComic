@@ -26,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.almin.freecomic.mvp.ui.home.HomeActivity" />
-        <activity android:name="com.almin.freecomic.mvp.ui.registration.RegistrationActivity" android:theme="@style/BaseActivityTheme"/>
+        <activity android:name="com.almin.freecomic.module.home.ui.HomeActivity" />
+        <activity android:name="com.almin.freecomic.module.registration.ui.RegistrationActivity" android:theme="@style/BaseActivityTheme"/>
     </application>
 
 </manifest>

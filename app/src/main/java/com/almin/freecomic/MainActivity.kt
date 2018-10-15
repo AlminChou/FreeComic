@@ -3,9 +3,9 @@ package com.almin.freecomic
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.almin.freecomic.mvp.ui.base.AbstractFcActivity
-import com.almin.freecomic.mvp.ui.home.HomeActivity
-import com.almin.freecomic.mvp.ui.registration.RegistrationActivity
+import com.almin.freecomic.module.common.ui.AbstractFcActivity
+import com.almin.freecomic.module.home.ui.HomeActivity
+import com.almin.freecomic.module.registration.ui.RegistrationActivity
 import com.almin.freecomic.navigator.RegistrationNavigator
 
 
