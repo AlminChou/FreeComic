@@ -6,21 +6,20 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import com.almin.freecomic.R
-import com.almin.freecomic.mvp.contract.AbstractContract
 import com.almin.freecomic.mvp.contract.LoginContract
-import com.almin.freecomic.mvp.datasource.LoginDataSourceImpl
-import com.almin.freecomic.navigator.RegistrationNavigator
-import com.almin.freecomic.mvp.presenter.login.LoginPresenterImpl
 import com.almin.freecomic.mvp.ui.base.AbstractFcFragment
-import com.almin.library.permission.PermissionGrantor
+import com.almin.freecomic.navigator.RegistrationNavigator
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * Created by Almin on 2018/6/22.
  */
 class LoginFragment : AbstractFcFragment(),LoginContract.ViewRenderer {
 
-    private lateinit var presenter: LoginContract.Presenter
+    override val presenter: LoginContract.Presenter by inject{ parametersOf(this,this) }
+tu
     private lateinit var navigator : RegistrationNavigator
 
     init {
@@ -37,10 +36,6 @@ class LoginFragment : AbstractFcFragment(),LoginContract.ViewRenderer {
         }
     }
 
-    override fun bindPresenter(): AbstractContract.Presenter {
-        presenter = LoginPresenterImpl(this, LoginDataSourceImpl(this))
-        return presenter
-    }
 
     override fun onFcAttatch(context: Context) {
         if (context is RegistrationNavigator) navigator = context
@@ -55,37 +50,29 @@ class LoginFragment : AbstractFcFragment(),LoginContract.ViewRenderer {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                btn_login.isEnabled = et_username.text.isNotEmpty() and et_pwd.text.isNotEmpty()
+                presenter.checkLoginButtonEnable(et_username.text.toString().trim(),et_pwd.text.toString().trim())
             }
         }
+
         et_username.addTextChangedListener(textWatcher)
         et_pwd.addTextChangedListener(textWatcher)
-        btn_login.isEnabled = false
         btn_login.setOnClickListener {
             presenter.clickLogin(et_username.text.toString().trim(),et_pwd.text.toString().trim())
         }
 
-        permissionGrantor = PermissionGrantor.with(this).build()
-
-
         tv_forgot_pwd.setOnClickListener { navigateToForgetPasswordPage()}
     }
 
-    lateinit var permissionGrantor : PermissionGrantor
-
     override fun initData() {
+        presenter.start(Unit)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        permissionGrantor.onRequestPermissionsResult(requestCode,permissions,grantResults)
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    override fun disableLoginButton() {
+        btn_login.isEnabled = false
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item!!.itemId){
-            R.id.menu_sign_up -> navigator.navigateToSignUpPage()
-        }
-        return super.onOptionsItemSelected(item)
+    override fun enableLoginButton() {
+        btn_login.isEnabled = true
     }
 
     override fun onLoginSuccess() {
@@ -98,5 +85,12 @@ class LoginFragment : AbstractFcFragment(),LoginContract.ViewRenderer {
 
     override fun navigateToForgetPasswordPage() {
         navigator.navigateToForgotPage()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId){
+            R.id.menu_sign_up -> navigator.navigateToSignUpPage()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

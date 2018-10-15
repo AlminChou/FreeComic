@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger
 /**
  * Created by Almin on 2018/7/11.
  */
+@SuppressWarnings("unchecked")
 class DefaultGrantStrategy(private val permissionDelegate: PermissionDelegate) : GrantStrategy{
 
     companion object {

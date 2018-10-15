@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog
  *
  * base on sdk version, we should use Compact class, such as ActivityCompact.java to handle permission.
  */
+@SuppressWarnings("unchecked")
 abstract class PermissionDelegate{
 
 

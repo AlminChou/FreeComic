@@ -16,8 +16,8 @@ class LoginPresenterImpl(private val viewRenderer: LoginContract.ViewRenderer,
 
             override fun onSuccess(response: LoginResponse) {
                  when(response.result){
-                     1 -> viewRenderer.onLoginSuccess()
-                     0 -> {
+                     LoginResponse.SUCCESS -> viewRenderer.onLoginSuccess()
+                     LoginResponse.FAILED -> {
                          viewRenderer.onLoginFailed(response.msg)
                      }
                  }
@@ -30,7 +30,17 @@ class LoginPresenterImpl(private val viewRenderer: LoginContract.ViewRenderer,
     }
 
 
-    override fun start() {
+    override fun start(t: Unit) {
+        viewRenderer.disableLoginButton()
+    }
+
+
+    override fun checkLoginButtonEnable(account: String, password: String) {
+        if(account.isEmpty() or password.isEmpty())
+            viewRenderer.disableLoginButton()
+        else
+            viewRenderer.enableLoginButton()
+
     }
 
     override fun detach() {

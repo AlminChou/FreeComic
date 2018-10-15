@@ -9,13 +9,16 @@ import com.almin.library.network.retrofitlibrary.callback.HttpResultSubscriber
 interface LoginContract{
 
     interface ViewRenderer: AbstractContract.ViewRenderer{
+        fun enableLoginButton()
+        fun disableLoginButton()
         fun onLoginSuccess()
         fun onLoginFailed(error: String)
         fun navigateToForgetPasswordPage()
     }
 
-    interface Presenter: AbstractContract.Presenter{
+    interface Presenter: AbstractContract.Presenter<Unit>{
         fun clickLogin(username: String, password: String)
+        fun checkLoginButtonEnable(account: String, password: String)
     }
 
     interface DataSource: AbstractContract.DataSource{

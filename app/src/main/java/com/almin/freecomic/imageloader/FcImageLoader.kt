@@ -8,6 +8,8 @@ import com.almin.library.imageloader.ImageLoaderCore
  * Created by Almin on 2018/6/22.
  */
 class FcImageLoader : ImageLoader{
+
+
     override fun setUpImageLoaderCore(loaderCore: ImageLoaderCore) {
 
     }

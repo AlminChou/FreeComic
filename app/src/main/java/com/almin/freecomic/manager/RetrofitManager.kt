@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient
  * Created by Almin on 2018/6/22.
  */
 class RetrofitManager : RetrofitClientProvider(){
+
     companion object {
         private val instance = RetrofitManager()
         fun instance() = instance
@@ -17,12 +18,10 @@ class RetrofitManager : RetrofitClientProvider(){
 
     override val baseUrl = "http://baseurl"
 
-    lateinit var userApiService : UserApiService
 
     override fun initService() {
-        userApiService = createService(UserApiService::class.java)
+        // do nothing , deliver Koin to do init
     }
-
 
     override fun addInterceptor(builder: OkHttpClient.Builder) {
         super.addInterceptor(builder)

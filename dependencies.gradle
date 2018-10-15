@@ -1,0 +1,52 @@
+// to manage app build config version
+ext {
+    kotlin_version = '1.2.60'
+    // build version
+    compileSdkVersion = 26
+    targetSdkVersion = 26
+    minSdkVersion = 15
+    versionCode = 1
+    versionName = "1.0"
+
+    guava = '23.0-android'
+    multidex = '1.0.3'
+
+    //inject
+    koin_version = '1.0.1'
+
+    // android ui
+    appcompat_v7_version = '27.1.1'
+    constraint_layout_version = '1.1.1'
+    suport_design_version = '27.1.1'
+    vector_drawable_version = '27.1.1'
+
+    glide_version = '4.7.1'
+
+
+    // rxjava & retrofit
+    rxandroid = '2.0.1'
+    rxjava2 = '2.1.0'
+    rxlifecycle2 = '2.0.1'
+    retrofit2 = '2.3.0'
+    retrofit2_converter_gson = '2.1.0'
+    rxlifecycle2_android = '2.0.1'
+    retrofit2_rxjava2_adapter = '1.0.0'
+    okhttp3_logging_interceptor = '3.9.0'
+    retrofit2_converter_scalars = '2.2.0'
+
+    // database
+    objectbox_version = '2.1.0'
+
+    // test dependencies version code
+    junit_version = '4.12'
+    test_runner = '1.0.2'
+    espresso_version = '3.0.2'
+
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}

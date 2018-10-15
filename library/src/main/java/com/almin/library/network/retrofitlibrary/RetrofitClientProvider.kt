@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 
 abstract class RetrofitClientProvider {
     var configuration: RetrofitConfiguration? = null
-    var retrofit: Retrofit? = null
+    lateinit var retrofit: Retrofit
         private set
 
     protected abstract val baseUrl: String

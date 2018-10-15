@@ -6,6 +6,17 @@
         <!--<item name="colorPrimary">@color/colorPrimary</item>-->
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
         <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+    </style>
+
+
+    <style name="LaunchTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@mipmap/bg_launch</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="BaseActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--　<item name="android:windowBackground">@color/translucent</item>-->
     </style>
 
 </resources>

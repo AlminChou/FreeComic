@@ -5,7 +5,8 @@ import com.almin.library.imageloader.ImageLoaderOptions
 /**
  * Created by Almin on 2018/8/31.
  */
-class GlideOptions : ImageLoaderOptions{
+class FcGlideOptions : ImageLoaderOptions{
+
     override fun setDiskCacheOptions() {
 
     }

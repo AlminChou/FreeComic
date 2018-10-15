@@ -16,10 +16,10 @@ interface UserApiService{
 //        "msg": "OK",
 //        "data": {
 //            "uid": "102018822",
-//            "nickname": "Crazy90554",
-//            "dmzj_token": "97de3098ebda29311386940a372c34d3",
+//            "nickname": "Crazy9",
+//            "dmzj_token": "97dehghyhnnfghgfhg",
 //            "photo": "http:\/\/images.dmzj.com\/user\/fe\/5e\/fe5e07796c3ca491983b1697d6b84356.png",
-//            "bind_phone": "13660096015",
+//            "bind_phone": "1366",
 //            "email": "",
 //            "passwd": "cbaa86fccd0c20f438b056c444b0f36e"
 //            }

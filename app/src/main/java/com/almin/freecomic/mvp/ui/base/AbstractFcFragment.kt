@@ -25,8 +25,7 @@ abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRen
     protected val toolbarBackgroundColor: Int = 0
     protected var navigationIcon = NavigationIcon.BACK
 
-    private var presenter : Presenter ? = null
-    protected abstract fun bindPresenter() : Presenter
+    protected abstract val presenter : Presenter<Unit>?
     protected abstract fun initView(view: View)
     protected abstract fun initData()
 
@@ -35,7 +34,6 @@ abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRen
     final override fun onAttach(context: Context) {
         super.onAttach(context)
         onFcAttatch(context)
-        presenter = bindPresenter()
         if (presenter == null){
             throw IllegalArgumentException("Presenter can not be null, please check!")
         }

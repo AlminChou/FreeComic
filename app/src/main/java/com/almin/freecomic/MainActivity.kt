@@ -11,18 +11,12 @@ import com.almin.freecomic.navigator.RegistrationNavigator
 
 class MainActivity : AbstractFcActivity() {
 
-    init {
-        pageTitle = null
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+//        setContentView(R.layout.activity_launch)
 
 //        HomeActivity.start(this)
         RegistrationActivity.go(this)
-
-
 
     }
 

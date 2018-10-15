@@ -2,27 +2,20 @@ package com.almin.freecomic.mvp.ui.registration
 
 import android.graphics.drawable.Drawable
 import android.view.View
-import android.widget.ImageView
 import com.almin.freecomic.R
+import com.almin.freecomic.imageloader.GlideApp
 import com.almin.freecomic.mvp.contract.AbstractContract
 import com.almin.freecomic.mvp.ui.base.AbstractFcFragment
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.DrawableImageViewTarget
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 /**
  * Created by Almin on 2018/6/26.
- */
-
-
-/**
- * Created by Almin on 2018/6/22.
  */
 class SignUpFragment : AbstractFcFragment() {
 
@@ -31,14 +24,14 @@ class SignUpFragment : AbstractFcFragment() {
         pageTitle = "注册"
     }
 
+    override val presenter: AbstractContract.Presenter<Unit> = AbstractContract.Presenter.EMPTY
+
     companion object {
         fun instance(): SignUpFragment{
             val signUpFragment = SignUpFragment()
             return signUpFragment.apply { arguments = null }
         }
     }
-
-    override fun bindPresenter() = AbstractContract.Presenter.EMPTY
 
     override fun initView(view: View) {
     }
@@ -58,7 +51,9 @@ class SignUpFragment : AbstractFcFragment() {
 //                .diskCacheStrategy(DiskCacheStrategy.DATA)	//只缓存原来分辨率的图片
 //                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)	//只缓存最终的图片
 
-//        Glide.get(activity).bu
+        var builderFactory = GlideBuilder().setBitmapPool(null)
+
+        GlideApp.init(activity!!.applicationContext,builderFactory)
         println("1212121212121")
         Glide.with(this)
                 .load("http://n.sinaimg.cn/tech/transform/525/w225h300/20180830/cNtG-hikcahf7723370.gif")
