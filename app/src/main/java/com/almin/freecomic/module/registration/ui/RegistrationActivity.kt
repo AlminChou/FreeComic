@@ -11,6 +11,9 @@ import com.almin.freecomic.navigator.RegistrationNavigator
  */
 class RegistrationActivity : AbstractFcActivity(),RegistrationNavigator{
 
+    init {
+        fragmentMinCount = 1
+    }
 
     companion object {
         fun go(activity: Activity){

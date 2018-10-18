@@ -27,7 +27,7 @@ abstract class AbstractActivity : LifecycleActivity(),Navigator {
     }
 
     override fun onBackPressed() {
-        if(!fragmentOperator.handleBackPressed()){
+        if(fragmentOperator.handleBackPressed()){
             finish()
         }
     }

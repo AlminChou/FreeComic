@@ -14,7 +14,7 @@ abstract class AbstractTabFragment: AbstractFcFragment(){
 
     override fun onHandleGoBack(): Boolean {
         println(" onHandleGoBack    $transactionTag    ")
-        return false
+        return true
     }
 
 

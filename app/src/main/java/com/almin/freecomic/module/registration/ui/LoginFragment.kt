@@ -26,7 +26,7 @@ class LoginFragment : AbstractFcFragment(), LoginContract.ViewRenderer {
         layoutResourceId = R.layout.fragment_login
         menuResourceId = R.menu.login_page_menu
         pageTitle = "登录"
-        toolbarBackgroundColor = R.color.colorPrimary
+//        toolbarBackgroundColor = R.color.colorPrimary
     }
 
     companion object {

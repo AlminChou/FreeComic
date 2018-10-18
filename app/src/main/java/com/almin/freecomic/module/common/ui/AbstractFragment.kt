@@ -27,7 +27,7 @@ abstract class AbstractFragment : LifecycleFragment(){
 
 //    fun isPageCanGoBack(): Boolean = true
 
-    open fun onHandleGoBack(): Boolean = true
+    open fun onHandleGoBack(): Boolean = false
 
     fun onPreviousPageBack(){
 
