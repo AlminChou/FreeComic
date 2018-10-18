@@ -40,6 +40,15 @@ fun Fragment.getStatusbarHeight() : Int{
     return result
 }
 
+fun Activity.getStatusbarHeight() : Int{
+    var result = 0
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    if (resourceId > 0) {
+        result = resources.getDimensionPixelSize(resourceId)
+    }
+    return result
+}
+
 fun Context.getDisplayWidth() : Int{
     val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
     val point = Point()

@@ -113,14 +113,23 @@ class FragmentOperatorDelegate(private val fragmentManager: FragmentManager,
         var isFragmentHandle = false
         var currentFragment: AbstractFragment? = getCurrentFragment()
         val count = fragmentManager.backStackEntryCount
-        if (count > fragmentMinCount) {
-            if (currentFragment!!.onHandleGoBack()) {
-                fragmentManager.popBackStackImmediate()
-                currentFragment = getCurrentFragment()
-                currentFragment!!.onPreviousPageBack()
+
+
+//        currentFragment?.let { isFragmentHandle = handleBackPressed() }
+
+        // three case
+        if(currentFragment!=null){
+            if (currentFragment.onHandleGoBack()) {
                 isFragmentHandle = true
+            }else{
+                if (count > fragmentMinCount) {
+                    fragmentManager.popBackStackImmediate()
+                    currentFragment = getCurrentFragment()
+                    currentFragment!!.onPreviousPageBack()
+                }
             }
         }
+
         return isFragmentHandle
     }
 

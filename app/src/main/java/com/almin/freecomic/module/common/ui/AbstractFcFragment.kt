@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.root_toolbar_layout.view.*
  */
 abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRenderer{
     protected var autoAttachToolbar = true
-    protected val toolbarBackgroundColor: Int = 0
+    protected var toolbarBackgroundColor: Int = 0
     protected var navigationIcon = NavigationIcon.BACK
 
     protected abstract val presenter : Presenter<Unit>?
@@ -65,17 +65,18 @@ abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRen
     }
 
 
-    private fun initToolbar(toolbar: Toolbar) {
+    protected open fun initToolbar(toolbar: Toolbar) {
         with(toolbar){
             title = pageTitle
 
             if(toolbarBackgroundColor > 0){
                 setBackgroundColor(ContextCompat.getColor(context, toolbarBackgroundColor))
+//                activity!!.window.statusBarColor = ContextCompat.getColor(context, toolbarBackgroundColor)
             }
 
             (activity as AppCompatActivity).setSupportActionBar(this)
             (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-//                    (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(true)
+//          (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(true)
 
             setNavigationIcon(this@AbstractFcFragment.navigationIcon.icon)
             setNavigationOnClickListener {

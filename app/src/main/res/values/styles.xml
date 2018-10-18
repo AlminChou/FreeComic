@@ -15,8 +15,17 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="HomeActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="colorPrimaryDark">@color/app_primary</item>-->
+    </style>
+
     <style name="BaseActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--　<item name="android:windowBackground">@color/translucent</item>-->
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
