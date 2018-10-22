@@ -10,7 +10,8 @@ import com.almin.library.scheduler.SchedulerProvider
 /**
  * Created by Almin on 2018/6/22.
  */
-class LoginDataSourceImpl(private val schedulerProvider: SchedulerProvider, private val userApiService: UserApiService): LoginContract.DataSource{
+class LoginDataSourceImpl(private val schedulerProvider: SchedulerProvider,
+                          private val userApiService: UserApiService): LoginContract.DataSource{
 
 
     override fun login(username: String, password: String, httpResultSubscriber: HttpResultSubscriber<LoginResponse>) {

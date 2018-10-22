@@ -66,6 +66,9 @@ class LoginFragment : AbstractFcFragment(), LoginContract.ViewRenderer {
 
     override fun initData() {
         presenter.start(Unit)
+        et_username.setText("13660096015")
+        et_pwd.setText("168888mmiscc")
+
     }
 
     override fun disableLoginButton() {

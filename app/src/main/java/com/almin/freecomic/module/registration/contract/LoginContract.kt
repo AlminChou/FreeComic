@@ -26,4 +26,8 @@ interface LoginContract{
         fun login(username: String,password: String, httpResultSubscriber: HttpResultSubscriber<LoginResponse>)
     }
 
+
+    interface Mapper{
+//        fun Map
+    }
 }

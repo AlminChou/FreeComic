@@ -15,9 +15,8 @@ class MainActivity : AbstractFcActivity() {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_launch)
 
-        HomeActivity.go(this)
-//        RegistrationActivity.go(this)
-        finish()
+//        HomeActivity.go(this)
+        RegistrationActivity.go(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

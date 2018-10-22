@@ -3,6 +3,10 @@ package com.almin.freecomic.di
 import android.app.Application
 import com.almin.freecomic.FcApplication
 import com.almin.freecomic.FcConfiguration
+import com.almin.freecomic.imageloader.FcImageLoader
+import com.almin.freecomic.manager.UserManager
+import com.almin.freecomic.module.common.datasource.model.UserProfile
+import com.almin.library.imageloader.ImageLoader
 import org.koin.dsl.module.module
 
 /**
@@ -15,6 +19,9 @@ val applicationModule = module {
 
     single { FcConfiguration.instance() }
 
+    single { FcImageLoader() } bind ImageLoader::class
+
+    factory { UserManager.instance().userProfile!! }
 }
 
 val appModules = listOf(applicationModule, apiServiceModule, registrationModule)

@@ -17,6 +17,7 @@ class FcUrlProcessor : DefaultUrlProcessor() {
             put("user_api_key","https://user.dmzj.com")
             put("v2_api_key","https://v2api.dmzj.com")
             put("download_api_key","https://imgzip.dmzj.com")
+            put("interface_api_key","https://interface.dmzj.com")
         }
     }
 

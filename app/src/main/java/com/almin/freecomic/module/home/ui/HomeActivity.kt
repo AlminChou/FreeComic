@@ -8,10 +8,20 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import com.almin.freecomic.R
 import com.almin.freecomic.extension.showToast
+import com.almin.freecomic.imageloader.FcImageLoader
+import com.almin.freecomic.imageloader.GlideApp
+import com.almin.freecomic.module.common.datasource.model.UserProfile
 import com.almin.freecomic.module.common.ui.AbstractFcActivity
+import com.almin.library.imageloader.ImageLoader
+import com.almin.library.imageloader.component.DisplayOptions
+import com.almin.library.imageloader.component.ScaleType
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.nav_header_home.view.*
+import org.koin.android.ext.android.inject
 
 
 class HomeActivity : AbstractFcActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -22,6 +32,9 @@ class HomeActivity : AbstractFcActivity(), NavigationView.OnNavigationItemSelect
     private val followsTab = Tab("关注",R.id.navigation_follow,FollowsTabFragment())
 
     private var lastBackTime: Long = 0
+
+    private val imageLoader: ImageLoader by inject()
+    private val user: UserProfile by inject()
 
     companion object {
         fun go(activity : AppCompatActivity){
@@ -50,9 +63,15 @@ class HomeActivity : AbstractFcActivity(), NavigationView.OnNavigationItemSelect
         tabDelegate.addTab(followsTab)
         tabDelegate.setUpTabNavigationView(navigation)
 
-        supportFragmentManager.addOnBackStackChangedListener {
 
-        }
+        // init user profile
+        val headerView = nav_view.getHeaderView(0)
+        val avatarView = headerView.findViewById<ImageView>(R.id.iv_avatar)
+        val displayOptions = DisplayOptions.create()
+        displayOptions.scaleType = ScaleType.CIRCLE_CROP
+        imageLoader.load(user.photo,avatarView,displayOptions)
+        headerView.findViewById<TextView>(R.id.tv_username).text = user.nickname
+        headerView.findViewById<TextView>(R.id.tv_email).text = user.email
     }
 
     override fun onBackPressed() {
