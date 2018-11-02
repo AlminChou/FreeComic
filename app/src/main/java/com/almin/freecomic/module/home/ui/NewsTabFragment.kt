@@ -15,14 +15,14 @@ class NewsTabFragment : AbstractTabFragment(){
     }
 
 
-    override val presenter: AbstractContract.Presenter<Unit>? = AbstractContract.Presenter.EMPTY
+    override val presenter: AbstractContract.Presenter<Any?>? = AbstractContract.Presenter.EMPTY
 
 
 
 
     override fun initView(view: View) {
 
-
+        super.initView(view)
     }
 
     override fun initData() {

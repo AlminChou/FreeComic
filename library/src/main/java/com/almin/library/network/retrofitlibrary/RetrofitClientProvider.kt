@@ -23,6 +23,8 @@ abstract class RetrofitClientProvider {
     lateinit var retrofit: Retrofit
         private set
 
+    lateinit var tokenProvider: TokenProvider
+
     protected abstract val baseUrl: String
 
     open protected val gsonConverter: Converter.Factory
@@ -42,8 +44,9 @@ abstract class RetrofitClientProvider {
             return builder.build()
         }
 
-    fun init(retrofitConfiguration: RetrofitConfiguration) {
+    fun init(retrofitConfiguration: RetrofitConfiguration, tokenProvider: TokenProvider) {
         this.configuration = retrofitConfiguration
+        this.tokenProvider = tokenProvider
         initRetrofit()
         initService()
     }
@@ -73,7 +76,7 @@ abstract class RetrofitClientProvider {
 
 
     protected fun <T> createService(clazz: Class<T>): T {
-        return retrofit!!.create(clazz)
+        return retrofit.create(clazz)
     }
 
     companion object {

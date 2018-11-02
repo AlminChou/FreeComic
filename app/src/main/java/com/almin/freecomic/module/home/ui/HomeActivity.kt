@@ -6,21 +6,19 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import com.almin.freecomic.R
 import com.almin.freecomic.extension.showToast
-import com.almin.freecomic.imageloader.FcImageLoader
-import com.almin.freecomic.imageloader.GlideApp
-import com.almin.freecomic.module.common.datasource.model.UserProfile
+import com.almin.freecomic.module.common.datasource.repository.UserRepository
 import com.almin.freecomic.module.common.ui.AbstractFcActivity
 import com.almin.library.imageloader.ImageLoader
 import com.almin.library.imageloader.component.DisplayOptions
 import com.almin.library.imageloader.component.ScaleType
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.koin.android.ext.android.inject
 
 
@@ -30,11 +28,13 @@ class HomeActivity : AbstractFcActivity(), NavigationView.OnNavigationItemSelect
     private val dashBoardTab = Tab("首页",R.id.navigation_dashboard,DashboardTabFragment())
     private val newsTab = Tab("新闻",R.id.navigation_news,NewsTabFragment())
     private val followsTab = Tab("关注",R.id.navigation_follow,FollowsTabFragment())
+    private val actionBarDrawerToggleMutableMap = mutableMapOf<String,ActionBarDrawerToggle>()
+
 
     private var lastBackTime: Long = 0
 
     private val imageLoader: ImageLoader by inject()
-    private val user: UserProfile by inject()
+    private val userRepository: UserRepository by inject()
 
     companion object {
         fun go(activity : AppCompatActivity){
@@ -47,15 +47,6 @@ class HomeActivity : AbstractFcActivity(), NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // init drawer
-        val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, null,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
-        nav_view.setNavigationItemSelectedListener(this)
-
-
         // init tab switch delegate
         tabDelegate = HomePageDelegate(R.id.fl_home_container,supportFragmentManager)
         tabDelegate.addTab(dashBoardTab)
@@ -63,15 +54,32 @@ class HomeActivity : AbstractFcActivity(), NavigationView.OnNavigationItemSelect
         tabDelegate.addTab(followsTab)
         tabDelegate.setUpTabNavigationView(navigation)
 
+        nav_view.setNavigationItemSelectedListener(this)
+
 
         // init user profile
         val headerView = nav_view.getHeaderView(0)
         val avatarView = headerView.findViewById<ImageView>(R.id.iv_avatar)
         val displayOptions = DisplayOptions.create()
         displayOptions.scaleType = ScaleType.CIRCLE_CROP
-        imageLoader.load(user.photo,avatarView,displayOptions)
-        headerView.findViewById<TextView>(R.id.tv_username).text = user.nickname
-        headerView.findViewById<TextView>(R.id.tv_email).text = user.email
+        imageLoader.load(userRepository.getUserProfile()!!.photo,avatarView,displayOptions)
+        headerView.findViewById<TextView>(R.id.tv_username).text = userRepository.getUserProfile()!!.nickname
+        headerView.findViewById<TextView>(R.id.tv_email).text = userRepository.getUserProfile()!!.email
+    }
+
+
+    fun initDrawer(toolbar: Toolbar) {
+        val tag: String = toolbar.tag as String
+        val toggle: ActionBarDrawerToggle =
+                actionBarDrawerToggleMutableMap[tag]?:ActionBarDrawerToggle(
+                        this, drawer_layout, toolbar,
+                        R.string.navigation_drawer_open, R.string.navigation_drawer_close).apply {
+                    actionBarDrawerToggleMutableMap[tag] = this
+                }
+
+        // for multi toolbar
+        drawer_layout.setDrawerListener(toggle)
+        toggle.syncState()
     }
 
     override fun onBackPressed() {

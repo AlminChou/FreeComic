@@ -1,7 +1,5 @@
-package com.almin.freecomic.manager
+package com.almin.freecomic.network
 
-import com.almin.freecomic.module.common.datasource.network.FcDynamicBaseUrlInterceptor
-import com.almin.freecomic.module.common.datasource.network.FcUrlProcessor
 import com.almin.library.network.retrofitlibrary.RetrofitClientProvider
 import okhttp3.OkHttpClient
 
@@ -22,9 +20,11 @@ class RetrofitManager : RetrofitClientProvider(){
         // do nothing , deliver Koin to do init
     }
 
+
+
     override fun addInterceptor(builder: OkHttpClient.Builder) {
         super.addInterceptor(builder)
-        builder.addInterceptor(FcDynamicBaseUrlInterceptor(FcUrlProcessor()))
+        builder.addInterceptor(FcDynamicBaseUrlInterceptor(FcUrlProcessor(tokenProvider)))
     }
 
 

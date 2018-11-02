@@ -1,4 +1,4 @@
-package com.almin.freecomic.module.common.datasource.network.response
+package com.almin.freecomic.module.common.datasource.model.response
 
 import com.almin.freecomic.module.common.datasource.model.UserProfile
  data class LoginResponse(

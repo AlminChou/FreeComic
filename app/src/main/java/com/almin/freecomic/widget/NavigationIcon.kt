@@ -9,7 +9,7 @@ data class NavigationIcon(val icon: Int, val iconColor: Int){
 
     companion object {
         val BACK = NavigationIcon(R.drawable.abc_ic_ab_back_material,0)
-        val HOME = NavigationIcon(0,0)
+        val HOME = NavigationIcon(R.drawable.ic_menu_manage,0)
     }
 
 

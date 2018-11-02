@@ -24,7 +24,7 @@ class SignUpFragment : AbstractFcFragment() {
         pageTitle = "注册"
     }
 
-    override val presenter: AbstractContract.Presenter<Unit> = AbstractContract.Presenter.EMPTY
+    override val presenter: AbstractContract.Presenter<Any?> = AbstractContract.Presenter.EMPTY
 
     companion object {
         fun instance(): SignUpFragment {

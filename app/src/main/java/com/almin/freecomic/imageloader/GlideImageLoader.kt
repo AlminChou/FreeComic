@@ -26,11 +26,8 @@ abstract class GlideImageLoader : ImageLoader {
                                bitmapTarget: BitmapTarget,
                                displayOptions: DisplayOptions,
                                cacheOptions: CacheOptions) {
-        val glideRequest: GlideRequest<Bitmap> = GlideApp.with(application.applicationContext)
-                .asBitmap()
-                .load(wrapperUrl(url))
 
-        wrapperOptions(glideRequest,displayOptions,cacheOptions)
+        wrapperOptions(GlideApp.with(application.applicationContext).asBitmap().load(wrapperUrl(url)),displayOptions,cacheOptions)
                 .into(object : BitmapImageViewTarget(null) {
                     override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                         super.onResourceReady(resource, transition)
@@ -71,9 +68,9 @@ abstract class GlideImageLoader : ImageLoader {
 
     private fun wrapperUrl(url: String) : GlideUrl =
             if(needReferer){
-                GlideUrl(url)
-            }else{
                 GlideUrl(url, Headers { mapOf(REFERER_KEY to refererHost) })
+            }else{
+                GlideUrl(url)
             }
 
     private fun <T: Any> wrapperOptions(glideRequest: GlideRequest<T>, displayOptions: DisplayOptions, cacheOptions: CacheOptions): GlideRequest<T> {

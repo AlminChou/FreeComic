@@ -25,7 +25,7 @@ abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRen
     protected var toolbarBackgroundColor: Int = 0
     protected var navigationIcon = NavigationIcon.BACK
 
-    protected abstract val presenter : Presenter<Unit>?
+    protected abstract val presenter : Presenter<Any?>?
     protected abstract fun initView(view: View)
     protected abstract fun initData()
 
@@ -76,6 +76,7 @@ abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRen
 
             (activity as AppCompatActivity).setSupportActionBar(this)
             (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
 //          (activity as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(true)
 
             setNavigationIcon(this@AbstractFcFragment.navigationIcon.icon)
@@ -93,6 +94,7 @@ abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRen
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        menu!!.clear()
         if (menuResourceId > 0) inflater!!.inflate(menuResourceId,menu) else super.onCreateOptionsMenu(menu, inflater)
     }
 

@@ -24,6 +24,7 @@ interface ImageLoader {
         get() = false
 
     val refererHost: String
+        get() = ""
 
     companion object {
         const val REFERER_KEY = "Referer"

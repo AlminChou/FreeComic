@@ -1,8 +1,8 @@
 package com.almin.freecomic.di
 
 import com.almin.freecomic.module.registration.contract.LoginContract
-import com.almin.freecomic.module.registration.datasource.LoginDataSourceImpl
-import com.almin.freecomic.module.registration.presenter.LoginPresenterImpl
+import com.almin.freecomic.module.registration.datasource.LoginDataSource
+import com.almin.freecomic.module.registration.presenter.LoginPresenter
 import com.almin.library.scheduler.SchedulerProvider
 import org.koin.dsl.module.module
 
@@ -11,9 +11,9 @@ import org.koin.dsl.module.module
  */
 val registrationModule = module {
 
-    factory { (view : LoginContract.ViewRenderer, schedulerProvider: SchedulerProvider)
-        ->
-        LoginPresenterImpl(view, LoginDataSourceImpl(schedulerProvider, get()))
+    factory {
+        (view: LoginContract.ViewRenderer, schedulerProvider: SchedulerProvider) ->
+        LoginPresenter(view, LoginDataSource(schedulerProvider, get(),get()))
     } bind LoginContract.Presenter::class
 
 }

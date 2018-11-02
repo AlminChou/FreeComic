@@ -1,4 +1,4 @@
-package com.almin.freecomic.module.common.datasource.network.apiservice
+package com.almin.freecomic.module.common.datasource.apiservice
 
 import io.reactivex.Observable
 import retrofit2.http.GET

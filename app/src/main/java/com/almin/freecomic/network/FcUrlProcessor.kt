@@ -1,7 +1,8 @@
-package com.almin.freecomic.module.common.datasource.network
+package com.almin.freecomic.network
 
 
 import android.support.v4.util.ArrayMap
+import com.almin.library.network.retrofitlibrary.TokenProvider
 import com.almin.library.network.retrofitlibrary.urlprocessor.DefaultUrlProcessor
 import okhttp3.HttpUrl
 
@@ -9,7 +10,7 @@ import okhttp3.HttpUrl
  * Created by Almin on 2018/1/16.
  */
 
-class FcUrlProcessor : DefaultUrlProcessor() {
+class FcUrlProcessor(private val tokenProvider: TokenProvider) : DefaultUrlProcessor() {
     private val mBaseUrlMap : ArrayMap<String,String> = ArrayMap()
 
     init {
@@ -18,6 +19,8 @@ class FcUrlProcessor : DefaultUrlProcessor() {
             put("v2_api_key","https://v2api.dmzj.com")
             put("download_api_key","https://imgzip.dmzj.com")
             put("interface_api_key","https://interface.dmzj.com")
+            put("v3_api_key","https://v3api.dmzj.com")
+
         }
     }
 
@@ -35,5 +38,13 @@ class FcUrlProcessor : DefaultUrlProcessor() {
                 .port(baseHttpUrl.port())
                 .build()
     }
+
+    override fun addParameter(builder: HttpUrl.Builder) {
+        super.addParameter(builder)
+        tokenProvider.getToken()?.let {
+            builder.addQueryParameter("dmzj_token", tokenProvider.getToken())
+        }
+    }
+
 
 }

@@ -1,7 +1,8 @@
 package com.almin.freecomic.di
 
-import com.almin.freecomic.manager.RetrofitManager
-import com.almin.freecomic.module.common.datasource.network.apiservice.UserApiService
+import com.almin.freecomic.network.RetrofitManager
+import com.almin.freecomic.module.common.datasource.apiservice.ComicApiService
+import com.almin.freecomic.module.common.datasource.apiservice.UserApiService
 import org.koin.dsl.module.module
 
 /**
@@ -11,4 +12,5 @@ val apiServiceModule = module {
 
     single { RetrofitManager.instance().retrofit.create(UserApiService::class.java) }
 
+    single { RetrofitManager.instance().retrofit.create(ComicApiService::class.java) }
 }

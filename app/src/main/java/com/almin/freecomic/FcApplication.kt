@@ -1,8 +1,11 @@
 package com.almin.freecomic
 
 import com.almin.freecomic.di.appModules
-import com.almin.freecomic.manager.RetrofitManager
+import com.almin.freecomic.module.common.datasource.local.UserManager
+import com.almin.freecomic.network.RetrofitManager
 import com.almin.library.AbstractApplication
+import com.almin.library.network.retrofitlibrary.TokenProvider
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.startKoin
 
 /**
@@ -20,8 +23,8 @@ class FcApplication : AbstractApplication(){
         instance = this
 
         startKoin(this,appModules)
-
-        RetrofitManager.instance().init(FcConfiguration.instance())
+        val tokenProvider: UserManager by inject()
+        RetrofitManager.instance().init(FcConfiguration.instance(),tokenProvider)
     }
 
     override fun onTerminate() {

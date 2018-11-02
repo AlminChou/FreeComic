@@ -1,13 +1,16 @@
-package com.almin.freecomic.module.common.datasource.network.apiservice
+package com.almin.freecomic.module.common.datasource.apiservice
 
-import com.almin.freecomic.module.common.datasource.network.response.LoginResponse
+import com.almin.freecomic.module.common.datasource.model.response.LoginResponse
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * Created by Almin on 2018/6/19.
  */
-interface UserApiService{
+interface UserApiService {
 
 //      URL	https://user.dmzj.com/loginV2/m_confirm
     //  channel=ios&nickname=13660096015&passwd=168888mmiscc&version=2.5.1

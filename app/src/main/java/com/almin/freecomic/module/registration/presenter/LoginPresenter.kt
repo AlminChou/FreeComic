@@ -1,15 +1,15 @@
 package com.almin.freecomic.module.registration.presenter
 
 import com.almin.freecomic.module.registration.contract.LoginContract
-import com.almin.freecomic.module.common.datasource.network.response.LoginResponse
+import com.almin.freecomic.module.common.datasource.model.response.LoginResponse
 import com.almin.library.network.retrofitlibrary.callback.HttpResultSubscriber
 import com.almin.library.network.retrofitlibrary.errorhandlecomponent.RetrofitException
 
 /**
  * Created by Almin on 2018/6/22.
  */
-class LoginPresenterImpl(private val viewRenderer: LoginContract.ViewRenderer,
-                         private val dataSource: LoginContract.DataSource) : LoginContract.Presenter{
+class LoginPresenter(private val viewRenderer: LoginContract.ViewRenderer,
+                     private val dataSource: LoginContract.DataSource) : LoginContract.Presenter{
 
     override fun clickLogin(username: String, password: String) {
         dataSource.login(username, password, object : HttpResultSubscriber<LoginResponse>() {
@@ -30,7 +30,7 @@ class LoginPresenterImpl(private val viewRenderer: LoginContract.ViewRenderer,
     }
 
 
-    override fun start(t: Unit) {
+    override fun start(t: Any?) {
         viewRenderer.disableLoginButton()
     }
 

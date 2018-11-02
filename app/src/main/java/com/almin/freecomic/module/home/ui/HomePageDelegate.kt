@@ -62,6 +62,7 @@ class HomePageDelegate(private val containerId: Int, private val fragmentManager
             }
         }
         currentTab = tab
+        currentTab.contentFragment.reload()
     }
 
 

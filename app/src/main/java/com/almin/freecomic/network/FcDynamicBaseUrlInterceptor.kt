@@ -1,4 +1,4 @@
-package com.almin.freecomic.module.common.datasource.network
+package com.almin.freecomic.network
 
 import android.text.TextUtils
 import android.util.Log
