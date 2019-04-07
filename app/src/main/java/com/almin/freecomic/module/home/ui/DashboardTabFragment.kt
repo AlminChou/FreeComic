@@ -15,7 +15,7 @@ class DashboardTabFragment : AbstractTabFragment(){
     }
 
 
-    override val presenter: AbstractContract.Presenter<Any?>? = AbstractContract.Presenter.EMPTY
+    override val presenter: AbstractContract.Presenter = AbstractContract.Presenter.EMPTY
 
 
 

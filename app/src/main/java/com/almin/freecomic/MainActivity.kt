@@ -34,6 +34,7 @@ class MainActivity : AbstractFcActivity() {
     }
 
 
+
     // 漫画页面用到
 //    override fun onWindowFocusChanged(hasFocus: Boolean) {
 //        super.onWindowFocusChanged(hasFocus)

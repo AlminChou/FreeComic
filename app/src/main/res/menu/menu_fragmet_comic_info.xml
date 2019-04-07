@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <item
+        android:icon="@mipmap/icon_follow_enable"
+        android:id="@+id/menu_follow"
+        app:showAsAction="always"
+        android:title="@string/title_follow" />
+
+    <item
+        android:icon="@mipmap/icon_download"
+        android:id="@+id/menu_download"
+        app:showAsAction="never"
+        android:title="@string/download_comic" />
+
+</menu>

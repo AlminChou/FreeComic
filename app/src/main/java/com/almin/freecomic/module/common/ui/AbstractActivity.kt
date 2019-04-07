@@ -41,7 +41,7 @@ abstract class AbstractActivity : LifecycleActivity(),Navigator {
         onBackPressed()
     }
 
-    override fun backToTagetPage(target: String) {
+    override fun backToTargetPage(target: String) {
     }
 
 

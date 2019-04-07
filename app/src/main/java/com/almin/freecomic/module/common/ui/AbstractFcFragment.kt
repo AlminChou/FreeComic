@@ -8,13 +8,13 @@ import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.RelativeLayout
 import com.almin.freecomic.R
-import com.almin.freecomic.module.common.contract.AbstractContract
-import com.almin.freecomic.module.common.contract.AbstractContract.Presenter
 import com.almin.freecomic.extension.afterKikat
 import com.almin.freecomic.extension.getStatusbarHeight
-import com.almin.freecomic.extension.showToast as quickShowToast
+import com.almin.freecomic.module.common.contract.AbstractContract
+import com.almin.freecomic.module.common.contract.AbstractContract.Presenter
 import com.almin.freecomic.widget.NavigationIcon
 import kotlinx.android.synthetic.main.root_toolbar_layout.view.*
+import com.almin.freecomic.extension.showToast as quickShowToast
 
 
 /**
@@ -25,7 +25,7 @@ abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRen
     protected var toolbarBackgroundColor: Int = 0
     protected var navigationIcon = NavigationIcon.BACK
 
-    protected abstract val presenter : Presenter<Any?>?
+    protected abstract val presenter : Presenter?
     protected abstract fun initView(view: View)
     protected abstract fun initData()
 
@@ -36,6 +36,9 @@ abstract class AbstractFcFragment : AbstractFragment(), AbstractContract.ViewRen
         onFcAttatch(context)
         if (presenter == null){
             throw IllegalArgumentException("Presenter can not be null, please check!")
+        }
+        arguments?.let {
+            presenter!!.start(it)
         }
     }
 

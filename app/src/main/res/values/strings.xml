@@ -18,4 +18,5 @@
     <string name="title_news">新闻</string>
     <string name="title_follow">订阅</string>
     <string name="retry">重试</string>
+    <string name="download_comic">下载</string>
 </resources>

@@ -3,6 +3,8 @@ package com.almin.freecomic.module.home.ui
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.almin.freecomic.R
+import com.almin.freecomic.module.comic.ui.ComicActivity
+import com.almin.freecomic.module.common.adapter.AbstractRecycleViewAdapter
 import com.almin.freecomic.module.common.datasource.model.response.FollowInfo
 import com.almin.freecomic.module.home.adapter.FollowListAdapter
 import com.almin.freecomic.module.home.contract.FollowsContract
@@ -17,7 +19,9 @@ import org.koin.core.parameter.parametersOf
  */
 
 /**
- * refactor mark : need to use diff util to refresh recycleView (pending)
+ * refactor mark :
+ *    1.need to use diff util to refresh recycleView (pending)
+ *    2.need to save data to db
  */
 class FollowsTabFragment  : AbstractTabFragment(),FollowsContract.ViewRenderer{
 
@@ -44,12 +48,12 @@ class FollowsTabFragment  : AbstractTabFragment(),FollowsContract.ViewRenderer{
         }
         rv_follows.layoutManager = layoutManager
         swipe_refresh.setOnRefreshListener {
-            presenter.start(null)
+            presenter.loadFollowList()
         }
 
         btn_retry_fetch.setOnClickListener {
             swipe_refresh.isRefreshing = true
-            presenter.start(null)
+            presenter.loadFollowList()
         }
     }
 
@@ -60,6 +64,13 @@ class FollowsTabFragment  : AbstractTabFragment(),FollowsContract.ViewRenderer{
     override fun displayFollowList(followInfoList: List<FollowInfo>) {
         if(adapter==null){
             adapter = FollowListAdapter(imageLoader,followInfoList.toMutableList())
+            adapter!!.onItemClickListener = object : AbstractRecycleViewAdapter.OnItemClickListener<FollowInfo>{
+                override fun onItemClick(position: Int, any: FollowInfo?) {
+                    any?.let {
+                        navigateToComicDetailPage("${it.id}", it.sub_img)
+                    }
+                }
+            }
             rv_follows.addItemDecoration(PinHeaderDecoration(adapter!!))
             rv_follows.adapter = adapter
         }else{
@@ -81,8 +92,15 @@ class FollowsTabFragment  : AbstractTabFragment(),FollowsContract.ViewRenderer{
         btn_retry_fetch.visibility = View.VISIBLE
     }
 
+    override fun disableRetryButton() {
+        btn_retry_fetch.visibility = View.GONE
+    }
 
-    override fun navigateToComicDetailPage(comicId: String) {
+    override fun navigateToComicDetailPage(comicId: String, comicAvatarUrl: String) {
+        activity?.let {
+            ComicActivity.go(it,comicId,comicAvatarUrl)
+        }
+
     }
 
     override fun reload() {

@@ -17,7 +17,7 @@ interface LoginContract{
         fun navigateToForgetPasswordPage()
     }
 
-    interface Presenter: AbstractContract.Presenter<Any?> {
+    interface Presenter: AbstractContract.Presenter {
         fun clickLogin(username: String, password: String)
         fun checkLoginButtonEnable(account: String, password: String)
     }

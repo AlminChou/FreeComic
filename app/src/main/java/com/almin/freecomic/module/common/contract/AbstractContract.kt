@@ -1,5 +1,7 @@
 package com.almin.freecomic.module.common.contract
 
+import android.os.Bundle
+
 interface AbstractContract {
 
     interface ViewRenderer {
@@ -10,15 +12,16 @@ interface AbstractContract {
         fun showSnackBar(msg: String)
     }
 
-    interface Presenter<T> {
-        fun start(t: T?)   //做页面第一次初始化动作的所有内容
+    interface Presenter {
+//        fun start(t: T?)   //做页面第一次初始化动作的所有内容
+        fun start(arguments: Bundle)   //做页面第一次初始化动作的所有内容
         fun detach()  //销毁一些presenter里面用到的list数据集合等缓存
 
         companion object {
 
             // for simple ui not need presenter
-            val EMPTY: Presenter<Any?> = object : Presenter<Any?> {
-                override fun start(t: Any?) {}
+            val EMPTY: Presenter = object : Presenter {
+                override fun start(arguments: Bundle) {}
 
                 override fun detach() {}
             }

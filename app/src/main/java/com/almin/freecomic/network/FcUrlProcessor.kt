@@ -43,6 +43,8 @@ class FcUrlProcessor(private val tokenProvider: TokenProvider) : DefaultUrlProce
         super.addParameter(builder)
         tokenProvider.getToken()?.let {
             builder.addQueryParameter("dmzj_token", tokenProvider.getToken())
+            builder.addQueryParameter("channel","Android")
+            builder.addQueryParameter("version","2.7.009")
         }
     }
 

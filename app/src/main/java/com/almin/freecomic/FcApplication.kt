@@ -22,9 +22,12 @@ class FcApplication : AbstractApplication(){
         super.onCreate()
         instance = this
 
-        startKoin(this,appModules)
-        val tokenProvider: UserManager by inject()
-        RetrofitManager.instance().init(FcConfiguration.instance(),tokenProvider)
+        Thread {
+            startKoin(this,appModules)
+            val tokenProvider: UserManager by inject()
+            RetrofitManager.instance().init(FcConfiguration.instance(),tokenProvider)
+        }.start()
+
     }
 
     override fun onTerminate() {

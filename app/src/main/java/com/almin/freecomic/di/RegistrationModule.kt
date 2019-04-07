@@ -11,8 +11,7 @@ import org.koin.dsl.module.module
  */
 val registrationModule = module {
 
-    factory {
-        (view: LoginContract.ViewRenderer, schedulerProvider: SchedulerProvider) ->
+    factory { (view: LoginContract.ViewRenderer, schedulerProvider: SchedulerProvider) ->
         LoginPresenter(view, LoginDataSource(schedulerProvider, get(),get()))
     } bind LoginContract.Presenter::class
 

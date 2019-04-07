@@ -11,13 +11,14 @@ interface FollowsContract{
 
     interface ViewRenderer : AbstractContract.ViewRenderer{
         fun displayFollowList(followInfoList: List<FollowInfo>)
-        fun navigateToComicDetailPage(comicId: String)
+        fun navigateToComicDetailPage(comicId: String, comicAvatarUrl: String)
         fun onFetchFollowListError()
         fun enableRetryButton()
+        fun disableRetryButton()
     }
 
-    interface Presenter : AbstractContract.Presenter<Any?>{
-
+    interface Presenter : AbstractContract.Presenter{
+        fun loadFollowList()
     }
 
     interface DataSource : AbstractContract.DataSource{

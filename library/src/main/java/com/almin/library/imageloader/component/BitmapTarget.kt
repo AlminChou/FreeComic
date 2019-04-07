@@ -6,5 +6,6 @@ import android.graphics.Bitmap
  * Created by Almin on 2018/10/19.
  */
 interface BitmapTarget {
-    fun onBitmapFetch(bitmap: Bitmap)
+    fun onBitmapTransform(bitmap: Bitmap): Bitmap
+    fun onBitmapReady(bitmap: Bitmap)
 }

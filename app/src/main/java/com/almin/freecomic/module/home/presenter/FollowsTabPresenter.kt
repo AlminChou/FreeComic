@@ -1,5 +1,6 @@
 package com.almin.freecomic.module.home.presenter
 
+import android.os.Bundle
 import com.almin.freecomic.module.common.datasource.model.response.FollowInfo
 import com.almin.freecomic.module.home.contract.FollowsContract
 import com.almin.library.network.retrofitlibrary.callback.HttpResultSubscriber
@@ -12,10 +13,15 @@ class FollowsTabPresenter(private val viewRenderer: FollowsContract.ViewRenderer
                           private val dataSource: FollowsContract.DataSource): FollowsContract.Presenter{
     private var followInfoList: List<FollowInfo>? = null
 
-    override fun start(t: Any?) {
+    override fun start(arguments: Bundle) {
+
+    }
+
+    override fun loadFollowList() {
         dataSource.getFollowList(object : HttpResultSubscriber<List<FollowInfo>>() {
             override fun onSuccess(t: List<FollowInfo>) {
                 followInfoList = t
+                followInfoList?.isNotEmpty().let { viewRenderer.disableRetryButton() }
                 viewRenderer.displayFollowList(t)
             }
 
@@ -25,6 +31,7 @@ class FollowsTabPresenter(private val viewRenderer: FollowsContract.ViewRenderer
             }
         })
     }
+
 
     override fun detach() {
         followInfoList!!.toMutableList().clear()

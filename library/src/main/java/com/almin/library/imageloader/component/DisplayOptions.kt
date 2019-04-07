@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 /**
  * Created by Almin on 2018/10/19.
  */
-class DisplayOptions(){
+class DisplayOptions{
     var width: Int = 0
     var height: Int = 0
     var scaleType: ScaleType = ScaleType.FIT_CENTER

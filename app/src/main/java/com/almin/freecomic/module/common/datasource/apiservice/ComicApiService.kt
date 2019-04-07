@@ -1,5 +1,6 @@
 package com.almin.freecomic.module.common.datasource.apiservice
 
+import com.almin.freecomic.module.comic.datasource.model.response.ComicInfoRsp
 import com.almin.freecomic.module.common.datasource.model.response.FollowInfo
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -20,4 +21,18 @@ interface ComicApiService{
     @GET("/v3_api_key/UCenter/subscribe")
     fun getPersonalSubscription(@Query("uid") usedId: String) : Observable<List<FollowInfo>>
 
+
+    //   step 1 find base info
+    @GET("/v3_api_key/comic/{comicId}.json")
+    fun getComicInfo(@Path("comicId") comicId: String) : Observable<ComicInfoRsp>
+
+    //  step 2 find history    (get  chapter info id   )
+    //   URL https://interface.dmzj.com/api/getReInfo/comic/102018822/9949/0
+    @GET("/interface_api_key/api/getReInfo/comic/{userId}/{comicid}/0")
+    fun getReadInfo(@Path("userId") userId: String, @Path("comicId") comicId: String) : Observable<String>
+
+    //  step 3 find page
+    //https://v3api.dmzj.com/chapter/9949/78442.json
+    @GET("/v3_api_key/chapter/{comicId}/{chapterId}.json")
+    fun getLastReadPage(@Path("comicId") comicId: String, @Path("chapterId") chapterId: String) : Observable<String>
 }

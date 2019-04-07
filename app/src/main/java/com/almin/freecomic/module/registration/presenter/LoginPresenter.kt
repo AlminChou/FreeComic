@@ -1,5 +1,6 @@
 package com.almin.freecomic.module.registration.presenter
 
+import android.os.Bundle
 import com.almin.freecomic.module.registration.contract.LoginContract
 import com.almin.freecomic.module.common.datasource.model.response.LoginResponse
 import com.almin.library.network.retrofitlibrary.callback.HttpResultSubscriber
@@ -10,6 +11,9 @@ import com.almin.library.network.retrofitlibrary.errorhandlecomponent.RetrofitEx
  */
 class LoginPresenter(private val viewRenderer: LoginContract.ViewRenderer,
                      private val dataSource: LoginContract.DataSource) : LoginContract.Presenter{
+
+    override fun start(arguments: Bundle) {
+    }
 
     override fun clickLogin(username: String, password: String) {
         dataSource.login(username, password, object : HttpResultSubscriber<LoginResponse>() {
@@ -27,11 +31,6 @@ class LoginPresenter(private val viewRenderer: LoginContract.ViewRenderer,
                 viewRenderer.onLoginFailed(retrofitException.localizedMessage)
             }
         })
-    }
-
-
-    override fun start(t: Any?) {
-        viewRenderer.disableLoginButton()
     }
 
 

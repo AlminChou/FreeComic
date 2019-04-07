@@ -9,7 +9,7 @@ import com.almin.freecomic.module.common.ui.AbstractFcFragment
  */
 class ForgotPasswordFragment : AbstractFcFragment() {
 
-    override val presenter: AbstractContract.Presenter<Any?> = AbstractContract.Presenter.EMPTY
+    override val presenter: AbstractContract.Presenter = AbstractContract.Presenter.EMPTY
 
     companion object {
         fun instance() = ForgotPasswordFragment()

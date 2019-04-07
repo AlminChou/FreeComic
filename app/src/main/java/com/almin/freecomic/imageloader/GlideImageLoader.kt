@@ -11,10 +11,14 @@ import com.almin.library.imageloader.ImageLoader.Companion.REFERER_KEY
 import com.almin.library.imageloader.component.*
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.Headers
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.request.target.BitmapImageViewTarget
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
+import java.security.MessageDigest
 
 /**
  * Created by Almin on 2018/10/19.
@@ -28,10 +32,18 @@ abstract class GlideImageLoader : ImageLoader {
                                cacheOptions: CacheOptions) {
 
         wrapperOptions(GlideApp.with(application.applicationContext).asBitmap().load(wrapperUrl(url)),displayOptions,cacheOptions)
-                .into(object : BitmapImageViewTarget(null) {
+//                .disallowHardwareConfig()
+                .transform(object : BitmapTransformation() {
+                    override fun updateDiskCacheKey(messageDigest: MessageDigest) {
+                    }
+
+                    override fun transform(pool: BitmapPool, toTransform: Bitmap, outWidth: Int, outHeight: Int): Bitmap {
+                        return bitmapTarget.onBitmapTransform(toTransform)
+                    }
+                })
+                .into(object : SimpleTarget<Bitmap>() {
                     override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                        super.onResourceReady(resource, transition)
-                        bitmapTarget.onBitmapFetch(resource)
+                        bitmapTarget.onBitmapReady(resource)
                     }
                 })
     }

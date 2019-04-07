@@ -62,10 +62,10 @@ class LoginFragment : AbstractFcFragment(), LoginContract.ViewRenderer {
         }
 
         tv_forgot_pwd.setOnClickListener { navigateToForgetPasswordPage()}
+        disableLoginButton()
     }
 
     override fun initData() {
-        presenter.start(Unit)
         et_username.setText("13660096015")
         et_pwd.setText("168888mmiscc")
 

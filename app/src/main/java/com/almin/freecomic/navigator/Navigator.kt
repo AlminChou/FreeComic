@@ -5,5 +5,5 @@ package com.almin.freecomic.navigator
  */
 interface Navigator{
     fun back()
-    fun backToTagetPage(target: String)
+    fun backToTargetPage(target: String)
 }

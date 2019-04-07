@@ -1,12 +1,16 @@
 package com.almin.freecomic.module.home.adapter
 
+import android.support.v7.recyclerview.extensions.AsyncListDiffer
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.almin.freecomic.R
+import com.almin.freecomic.module.common.adapter.AbstractRecycleViewAdapter
 import com.almin.freecomic.module.common.datasource.model.response.FollowInfo
 import com.almin.freecomic.widget.PinHeaderDecoration
 import com.almin.library.imageloader.ImageLoader
@@ -16,7 +20,7 @@ import com.almin.library.imageloader.ImageLoader
  */
 class FollowListAdapter(private val imageLoader: ImageLoader,
                         private var followList: MutableList<FollowInfo>)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>(), PinHeaderDecoration.OnGroupListener {
+    : AbstractRecycleViewAdapter<FollowInfo,RecyclerView.ViewHolder>(), PinHeaderDecoration.OnGroupListener {
 
     companion object {
         private const val GROUP_NAME_UPDATE = "已更新"
@@ -30,8 +34,20 @@ class FollowListAdapter(private val imageLoader: ImageLoader,
     private val alreadyHeaderItemData: FollowInfo = FollowInfo("header_already")
 
 
+    private var asyncListDiffer: AsyncListDiffer<FollowInfo>
+
     init{
         rebuildData()
+        asyncListDiffer = AsyncListDiffer(this,object : DiffUtil.ItemCallback<FollowInfo>() {
+            override fun areItemsTheSame(oldItem: FollowInfo, newItem: FollowInfo): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: FollowInfo, newItem: FollowInfo): Boolean {
+                return TextUtils.equals(oldItem.sub_update,newItem.sub_update)
+            }
+        })
+        asyncListDiffer.submitList(followList)
     }
 
 
@@ -80,7 +96,8 @@ class FollowListAdapter(private val imageLoader: ImageLoader,
         }
     }
 
-    override fun getItemCount(): Int = followList.size
+//    override fun getItemCount(): Int = followList.size
+    override fun getItemCount(): Int = asyncListDiffer.currentList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
@@ -204,7 +221,14 @@ class FollowListAdapter(private val imageLoader: ImageLoader,
     fun refresh(followInfoList: List<FollowInfo>) {
         followList = followInfoList.toMutableList()
         rebuildData()
-        notifyDataSetChanged()
+//        notifyDataSetChanged()
+
+
+        asyncListDiffer.submitList(followList)
+    }
+
+    override fun onItemClick(position: Int) {
+        onItemClickListener!!.onItemClick(position,followList[position])
     }
 
     private class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
